@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
+
+  :root {
+    --vp: #008030;
+    --vs: #70B010;
+    --vi: #209050;
+    --am: #F0C020;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    background: #e8e8e8;
+    padding: 30px;
+  }
+
+  .page {
+    background: white;
+    max-width: 820px;
+    margin: 0 auto;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.15);
+  }
+
+  /* Barras */
+  .top-bar { display:flex; height:7px; }
+  .tb1 { flex:1; background: var(--vp); }
+  .tb2 { flex:1; background: var(--vi); }
+  .tb3 { flex:1; background: var(--vs); }
+  .tb4 { flex:1; background: var(--am); }
+
+  /* Encabezado */
+  .header {
+    background: var(--vp);
+    padding: 24px 52px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18pt;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 1px;
+  }
+  .brand h1 span { color: var(--am); }
+  .brand p {
+    color: rgba(255,255,255,0.75);
+    font-size: 8pt;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-top: 4px;
+  }
+  .header-tag { text-align: right; }
+  .doc-tag {
+    display: inline-block;
+    background: var(--am);
+    color: var(--vp);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 8pt;
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .header-tag p {
+    color: rgba(255,255,255,0.7);
+    font-size: 8pt;
+    line-height: 1.8;
+  }
+
+  /* Banda título */
+  .titulo-band {
+    background: var(--vi);
+    padding: 10px 52px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.3px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* Cuerpo */
+  .body { padding: 30px 52px 28px; }
+
+  /* Sección */
+  .seccion { margin-bottom: 22px; }
+
+  .sec-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--vs);
+    padding-bottom: 5px;
+  }
+  .sec-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: var(--vp);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Grilla de campos */
+  .campos { display: grid; gap: 10px; margin-top: 4px; }
+  .campos-2 { grid-template-columns: 1fr 1fr; }
+  .campos-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .campo { display: flex; flex-direction: column; gap: 3px; }
+  .campo label {
+    font-size: 7.5pt;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--vp);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ESTILOS PARA INPUTS INTERACTIVOS */
+  input[type="text"], input[type="date"], input[type="time"], input[type="email"], input[type="tel"], select {
+    border: none;
+    border-bottom: 1.5px solid #bbb;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 9pt;
+    color: #333;
+    padding: 4px 0;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  input[readonly] {
+    color: #777;
+    background-color: #f9f9f9;
+  }
+  input[type="text"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus {
+    border-bottom: 1.5px solid var(--vp);
+  }
+
+  /* Tabla de verificación por sede */
+  .tabla-check {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin-top: 6px;
+  }
+  .tabla-check thead tr { background: var(--vp); color: white; }
+  .tabla-check thead th {
+    padding: 8px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 8.5pt;
+    text-align: left;
+  }
+  .tabla-check thead th.center { text-align: center; }
+  .tabla-check tbody tr:nth-child(even) { background: #f2f8f2; }
+  .tabla-check tbody tr:nth-child(odd) { background: white; }
+  .tabla-check tbody td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #d8ecd8;
+    vertical-align: middle;
+    line-height: 1.4;
+    color: #333;
+  }
+  .tabla-check tbody td.center { text-align: center; }
+  
+  .check-box {
+    width: 16px; height: 16px;
+    cursor: pointer;
+    accent-color: var(--vp);
+  }
+  .sede-header {
+    background: var(--vs) !important;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 8.5pt;
+    padding: 6px 10px;
+    letter-spacing: 0.3px;
+  }
+
+  /* Observaciones interactiva */
+  textarea.obs-box {
+    width: 100%;
+    border: 1.5px solid #ccc;
+    border-radius: 3px;
+    min-height: 80px;
+    margin-top: 6px;
+    padding: 8px;
+    font-size: 9pt;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    outline: none;
+    resize: vertical;
+  }
+  textarea.obs-box:focus {
+    border-color: var(--vp);
+  }
+
+  /* Declaración */
+  .declaracion {
+    background: #f2f8f2;
+    border-left: 4px solid var(--vs);
+    padding: 11px 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 9.5pt;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .declaracion strong { color: var(--vp); }
+
+  /* Firmas */
+  .firmas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 10px;
+  }
+  .firma-bloque { display: flex; flex-direction: column; gap: 6px; }
+  .firma-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--vp);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .firma-campo { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+  .firma-campo label {
+    font-size: 7.5pt;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .sello-box {
+    border: 1.5px dashed #ccc;
+    border-radius: 4px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    cursor: pointer;
+    background: #fafafa;
+  }
+  .sello-box:hover { background: #f0f0f0; }
+  .sello-box span {
+    font-size: 8pt;
+    color: #bbb;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Botón de enviar */
+  .btn-submit {
+    display: block;
+    width: 100%;
+    background: var(--vp);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 11pt;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s;
+  }
+  .btn-submit:hover { background: var(--vi); }
+
+  /* Pie */
+  .footer-doc {
+    margin-top: 28px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #aaa;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .footer-doc span { color: var(--vp); font-weight: 700; }
+
+  .bot-bar { display:flex; height:6px; margin-top: 24px; }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; }
+    .btn-submit { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top-bar"><div class="tb1"></div><div class="tb2"></div><div class="tb3"></div><div class="tb4"></div></div>
+
+  <div class="header">
+    <div class="brand">
+      <h1>ALIANZA <span>TEAM</span></h1>
+      <p>Gerencia de Transporte y Almacenamiento</p>
+    </div>
+    <div class="header-tag">
+      <div class="doc-tag">Acta de Visita Técnica</div>
+      <p>Proceso Privado · Confidencial</p>
+    </div>
+  </div>
+
+  <div class="titulo-band">
+    Acta de Visita Técnica – Arrendamiento Full Service de Equipos Montacargas
+  </div>
+
+  <form class="body" onsubmit="event.preventDefault(); alert('Formulario listo para procesar datos.');">
+
+    <div class="seccion">
+      <div class="sec-titulo">
+        <div class="sec-label">1. Datos del Proceso</div>
+      </div>
+      <div class="campos campos-2">
+        <div class="campo">
+          <label>Fecha de la Visita</label>
+          <input type="date" required>
+        </div>
+        <div class="campo">
+          <label>Sede Visitada</label>
+          <select id="sedeSelect" onchange="actualizarDireccion()" required>
+            <option value="" disabled selected>Seleccione la sede</option>
+            <option value="Bogotá">Bogotá</option>
+            <option value="Barranquilla">Barranquilla</option>
+            <option value="Buga">Buga</option>
+          </select>
+        </div>
+      </div>
+      <div class="campos campos-2" style="margin-top:10px;">
+        <div class="campo">
+          <label>Dirección de la Planta</label>
+          <input type="text" id="direccionInput" placeholder="Se completará automáticamente" required readonly>
+        </div>
+        <div class="campo">
+          <label>Ciudad</label>
+          <input type="text" id="ciudadInput" placeholder="Se completará automáticamente" required readonly>
+        </div>
+      </div>
+      <div class="campos campos-2" style="margin-top:10px;">
+        <div class="campo">
+          <label>Hora de Inicio</label>
+          <input type="time" required>
+        </div>
+        <div class="campo">
+          <label>Hora de Finalización</label>
+          <input type="time" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <div class="sec-titulo">
+        <div class="sec-label">2. Datos del Proveedor Oferente</div>
+      </div>
+      <div class="campos campos-2">
+        <div class="campo">
+          <label>Razón Social</label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>NIT</label>
+          <input type="text" required>
+        </div>
+      </div>
+      <div class="campos campos-2" style="margin-top:10px;">
+        <div class="campo">
+          <label>Nombre del Representante Asistente</label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>Cargo</label>
+          <input type="text" required>
+        </div>
+      </div>
+      <div class="campos campos-2" style="margin-top:10px;">
+        <div class="campo">
+          <label>Teléfono de Contacto</label>
+          <input type="tel" required>
+        </div>
+        <div class="campo">
+          <label>Correo Electrónico</label>
+          <input type="email" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <div class="sec-titulo">
+        <div class="sec-label">3. Representante de Alianza Team</div>
+      </div>
+      <div class="campos campos-3">
+        <div class="campo">
+          <label>Nombre</label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>Cargo</label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>Área</label>
+          <input type="text" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <div class="sec-titulo">
+        <div class="sec-label">4. Verificación de Zonas Recorridas</div>
+      </div>
+      <p style="font-size:9pt; color:#555; margin-bottom:8px;">Marque con una ✓ las zonas verificadas y agregue observaciones si aplica:</p>
+
+      <table class="tabla-check">
+        <thead>
+          <tr>
+            <th style="width:55%">Zona / Aspecto Verificado</th>
+            <th class="center" style="width:15%">Verificado</th>
+            <th style="width:30%">Observación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="3" class="sede-header">📍 Infraestructura General</td></tr>
+          <tr>
+            <td>Condiciones generales del piso (tipo, estado, nivelación)</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Dimensiones y estado de los pasillos de operación</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Altura libre de la bodega / nave</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Zonas de carga y descarga de vehículos</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+
+          <tr><td colspan="3" class="sede-header">📍 Operación y Equipos</td></tr>
+          <tr>
+            <td>Tipos de rack y alturas de estantería</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Flujos de operación y rutas de circulación de equipos</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Zonas de alistamiento y preparación de pedidos</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Tipos de carga manipulada (estibas, contenedores, a granel)</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+
+          <tr><td colspan="3" class="sede-header">📍 Condiciones de Servicio</td></tr>
+          <tr>
+            <td>Turnos y horarios de operación de la planta</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Disponibilidad de zona para parqueo / carga de equipos</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Espacio disponible para técnico residente (Inhouse)</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+          <tr>
+            <td>Disponibilidad de conexiones eléctricas para carga de baterías</td>
+            <td class="center"><input type="checkbox" class="check-box"></td>
+            <td><input type="text" placeholder="Observación..." style="border:none; border-bottom:1px solid #ccc; width:100%; background:transparent; font-size:8.5pt;"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="seccion">
+      <div class="sec-titulo">
+        <div class="sec-label">5. Observaciones Generales del Proveedor</div>
+      </div>
+      <textarea class="obs-box" placeholder="Escriba aquí las observaciones generales del recorrido..."></textarea>
+    </div>
+
+    <div class="seccion">
+      <div class="sec-titulo">
+        <div class="sec-label">6. Declaración y Firmas</div>
+      </div>
+
+      <div class="declaracion">
+        <label style="display:flex; align-items:start; gap:10px; cursor:pointer;">
+          <input type="checkbox" class="check-box" style="margin-top:4px;" required>
+          <span>Los suscritos declaramos que la presente visita técnica se realizó en las instalaciones de <strong>Alianza Team</strong> (TEAM FOODS COLOMBIA S.A. / GRASAS S.A.), sede indicada en este documento. El representante del proveedor declara haber conocido presencialmente las condiciones reales de operación y se compromete a estructurar su propuesta con base en la información observada. Esta acta deberá ser anexada a la propuesta económica como requisito de participación.</span>
+        </label>
+      </div>
+
+      <div class="firmas">
+        <div class="firma-bloque">
+          <div class="firma-titulo">Por el Proveedor Oferente</div>
+          <div style="min-height:30px;"></div>
+          <div class="firma-campo">
+            <label>Nombre completo</label>
+            <input type="text" required>
+          </div>
+          <div class="firma-campo">
+            <label>Cargo</label>
+            <input type="text" required>
+          </div>
+          <div class="firma-campo">
+            <label>Empresa</label>
+            <input type="text" required>
+          </div>
+          <div class="firma-campo">
+            <label>C.C. / NIT</label>
+            <input type="text" required>
+          </div>
+          <label class="sello-box">
+            <input type="file" accept="image/*" style="display:none;">
+            <span>Adjuntar Firma / Sello</span>
+          </label>
+        </div>
+
+        <div class="firma-bloque">
+          <div class="firma-titulo">Por Alianza Team</div>
+          <div style="min-height:30px;"></div>
+          <div class="firma-campo">
+            <label>Nombre completo</label>
+            <input type="text" required>
+          </div>
+          <div class="firma-campo">
+            <label>Cargo</label>
+            <input type="text" required>
+          </div>
+          <div class="firma-campo">
+            <label>Área</label>
+            <input type="text" required>
+          </div>
+          <div class="firma-campo">
+            <label>Fecha</label>
+            <input type="date" required>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn-submit">Guardar Acta de Visita</button>
+
+    <div class="footer-doc">
+      <span>TEAM FOODS COLOMBIA S.A. &amp; GRASAS S.A.</span>
+      <span>Proceso Privado · Confidencial</span>
+    </div>
+
+  </form>
+
+  <div class="bot-bar"><div class="tb1"></div><div class="tb2"></div><div class="tb3"></div><div class="tb4"></div></div>
+
+</div>
+
+<script>
+  function actualizarDireccion() {
+    const sede = document.getElementById("sedeSelect").value;
+    const direccion = document.getElementById("direccionInput");
+    const ciudad = document.getElementById("ciudadInput");
+
+    if (sede === "Bogotá") {
+      direccion.value = "Calle 45 A Sur No 56-21";
+      ciudad.value = "Bogotá D.C.";
+    } else if (sede === "Buga") {
+      direccion.value = "Cl 11 No 18 -113";
+      ciudad.value = "Buga";
+    } else if (sede === "Barranquilla") {
+      direccion.value = "Vía 40 No 54-178";
+      ciudad.value = "Barranquilla";
+    } else {
+      direccion.value = "";
+      ciudad.value = "";
+    }
+  }
+</script>
+
+</body>
+</html>
